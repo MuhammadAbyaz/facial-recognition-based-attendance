@@ -1,12 +1,13 @@
 import cv2
-from detection import predict_face
+from face_recognition import predict_face
+from face_recognition import training
 
 
-def video():
+def video_capture():
+    training()
     video_capture = cv2.VideoCapture(0)
     while True:
-        ret, frame = video_capture.read()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        _, frame = video_capture.read()
 
         result = predict_face(frame)
         if result is not None:
