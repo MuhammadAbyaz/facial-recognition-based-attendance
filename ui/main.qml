@@ -12,6 +12,7 @@ ApplicationWindow {
     flags: Qt.Window | Qt.MSWindowsFixedSizeDialogHint | Qt.WindowCloseButtonHint
     Material.theme: Material.Light
     Material.accent: "#000000"
+
     StackView {
         id: stackView
         initialItem: "login.qml"
