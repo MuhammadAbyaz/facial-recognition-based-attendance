@@ -18,7 +18,7 @@ Page {
 
         TextField {
             id: passwordField
-            placeholderText: qsTr("Password")
+            placeholderText: qsTr("Secret Password")
             width: 300
             echoMode: TextInput.Password
         }
