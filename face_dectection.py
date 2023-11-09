@@ -1,10 +1,13 @@
-import cv2
 import os
+
+import cv2
+
+haarcascade_path = "/haarcascade_frontalface_default.xml"
 
 
 def detect_face(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    cascade_path = os.getcwd() + "/haarcascade_frontalface_default.xml"
+    cascade_path = os.getcwd() + haarcascade_path
     face_cascade = cv2.CascadeClassifier(cascade_path)
     detected_faces = face_cascade.detectMultiScale(gray, scaleFactor=1.05,
                                                    minNeighbors=12, minSize=(30, 30),

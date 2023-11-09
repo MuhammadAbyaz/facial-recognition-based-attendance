@@ -1,9 +1,11 @@
-import numpy as np
-from face_recognition import face_recognizer
-import requests
 import cv2
-from face_detetction import detect_face
-from db import supabase
+import numpy as np
+import requests
+
+from db import bucket_name, supabase
+from face_dectection import detect_face
+from face_prediction import face_recognizer
+from logger import Logger
 
 
 def decode_image_from_url(url):
@@ -14,29 +16,29 @@ def decode_image_from_url(url):
 
 
 def get_images_url():
-    url_list = []
-    bucket_name = "training"
-    folders = [folder["name"]
-               for folder in supabase.storage.from_(bucket_name).list()]
+    url_list: list[str] = []
+    training_bucket = supabase.storage.from_(bucket_name)
+
+    folders = list(map(lambda f: f['name'], training_bucket.list()))
     for folder in folders:
-        for value in supabase.storage.from_(bucket_name).list(folder):
-            if value["name"] == ".emptyFolderPlaceholder":
-                value.pop("name")
-            else:
-                url_list.append(supabase.storage.from_(
-                    bucket_name).get_public_url(folder + "/" + value["name"]))
+        for value in training_bucket.list(folder):
+            filename = value['name']
+            if ".emptyFolderPlaceholder" == filename:
+                continue
+            file_path = f"{folder}/{filename}"
+            url_list.append(training_bucket.get_public_url(file_path))
     return url_list
 
 
-def image_training():
+def training_on_images():
     labels = []
     faces = []
     image_urls = get_images_url()
     for image_url in image_urls:
-        label = int(image_url.split("/")[-2][-1])
+        label = int(image_url.split("/")[-2])
         image = decode_image_from_url(image_url)
 
-        print("[INFO] performing training...")
+        Logger.info("performing training")
         face, _ = detect_face(image)
 
         if face is not None:
