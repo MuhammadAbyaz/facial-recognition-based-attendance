@@ -1,15 +1,19 @@
 import cv2
-from face_recognition import predict_face
-from training import image_training
+
+from db import supabase
+from face_prediction import predict_face
+from training import training_on_images
 
 
 def capture_video():
-    image_training()
+    training_on_images()
+    response = supabase.table("students").select("id", "name").execute()
+    label_array = [res["name"] for res in response.data]
     video_capture = cv2.VideoCapture(0)
     while True:
         _, frame = video_capture.read()
 
-        result = predict_face(frame)
+        result = predict_face(frame, label_array)
         if result is not None:
             cv2.imshow("Frame", result)
         else:
