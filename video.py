@@ -23,3 +23,5 @@ def capture_video():
 
     video_capture.release()
     cv2.destroyAllWindows()
+
+
