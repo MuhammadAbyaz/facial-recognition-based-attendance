@@ -6,8 +6,8 @@ import QtQuick.Controls.Material
 
 ApplicationWindow {
     visible: true
-    height: 800
-    width: 800
+    height: 780
+    width: 1530
     title: qsTr("Facial Recognition Based Attendance")
     flags: Qt.Window | Qt.MSWindowsFixedSizeDialogHint | Qt.WindowCloseButtonHint
     Material.theme: Material.Light
