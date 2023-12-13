@@ -3,10 +3,10 @@
 ```bash
 # Clone Project
 # HTTPs
-git clone https://github.com/MuhammadAbyaz/smart_attendance.git
+git clone https://github.com/MuhammadAbyaz/facial-recognition-based-attendance.git
 
 # SSH
-git clone git@github.com:MuhammadAbyaz/smart_attendance.git
+git clone git@github.com:MuhammadAbyaz/facial-recognition-based-attendance.git
 
 # Setting Virtual Environment
 Python -m venv env
