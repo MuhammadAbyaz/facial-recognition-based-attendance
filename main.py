@@ -1,8 +1,9 @@
 import sys
+from os.path import abspath, dirname, join
+
 from PySide6.QtCore import QObject, Slot
-from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtGui import QGuiApplication
-from os.path import join, dirname, abspath
+from PySide6.QtQml import QQmlApplicationEngine
 
 
 class Bridge(QObject):
