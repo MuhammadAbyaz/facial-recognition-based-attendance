@@ -1,0 +1,11 @@
+import QtQuick 2.16
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Window
+import QtQuick.Controls.Material
+
+Page {
+    title: qsTr("Facial Recognition Based Attendance")
+    RowLayout {
+    }
+}
