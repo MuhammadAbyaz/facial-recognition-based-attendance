@@ -1,3 +1,10 @@
-[{
-    "editor.formatter": "ms-python-autopep8"
-}]
+{
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "[qml]": {
+    "editor.defaultFormatter": "seanwu.vscode-qt-for-python",
+    "editor.formatOnSave": true
+  }
+}
