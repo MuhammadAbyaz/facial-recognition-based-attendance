@@ -1,2 +1,0 @@
-class NotExistException(Exception):
-    pass
