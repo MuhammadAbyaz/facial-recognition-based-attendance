@@ -10,187 +10,132 @@ Page {
     TabBar {
         id: tabBar
         x: -245
-        y: 238
-        width: 785
-        height: 300
-        rotation: 90
+        y: 0
+        width: 1800
+        height: 70
+        rotation: 0
         background: Pane {
             Material.elevation: 6
         }
     }
     Image {
-        x: 10
-        y: -96
+        x: 20
+        y: -120
         width: 270
         height: 312
         source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/logo.png"
         fillMode: Image.PreserveAspectFit
     }
-    TabButton {
-        id: tabButton
-        x: 19
-        y: 138
-        width: 280
-        height: 48
-        text: qsTr("Teachers")
-        font.weight: Font.Normal
-        font.bold: false
-        font.pointSize: 14
-        rotation: 0
+    TabBar {
+        x: 880
+        y: 12
+        TabButton {
+            id: tabButton
+            x: 770
+            y: 12
+            width: 100
+            height: 48
+            text: qsTr("Teachers")
+            font.weight: Font.Normal
+            font.bold: false
+            font.pointSize: 14
+            rotation: 0
+        }
 
-        Label {
-            font.pixelSize: 16
-            Image {
-                id: image1
-                x: 35
-                y: 10
-                width: 30
-                height: 30
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/teacher.png"
-                fillMode: Image.PreserveAspectFit
+        TabButton {
+            id: student_button
+            x: 900
+            y: 12
+            width: 100
+            height: 48
+            text: qsTr("Students")
+            font.weight: Font.Normal
+            font.bold: false
+            font.pointSize: 14
+            rotation: 0
+        }
+        TabButton {
+            id: report_button
+            x: 1020
+            y: 12
+            width: 100
+            height: 48
+            text: qsTr("Report")
+            font.weight: Font.Normal
+            font.bold: false
+            font.pointSize: 14
+            rotation: 0
+        }
+        TabButton {
+            id: policy_button
+            x: 1140
+            y: 12
+            width: 100
+            height: 48
+            text: qsTr("Policy")
+            font.weight: Font.Normal
+            font.bold: false
+            font.pointSize: 14
+            rotation: 0
+        }
+
+        TabButton {
+            id: team_button
+            x: 1260
+            y: 12
+            width: 100
+            height: 48
+            text: qsTr("Team")
+            font.weight: Font.Normal
+            font.bold: false
+            font.pointSize: 14
+            rotation: 0
+        }
+        TabButton {
+            id: logout_button
+            x: 1380
+            y: 12
+            width: 100
+            height: 48
+            text: qsTr("Logout")
+            font.weight: Font.Normal
+            font.bold: false
+            font.pointSize: 14
+            rotation: 0
+
+            onClicked: {
+                logoutMenu.open();
+            }
+
+            Menu {
+                id: logoutMenu
+                y: logout_button.height
+                MenuItem {
+                    text: "Log Out"
+                    onTriggered: {
+                        print("logging out...");
+                    }
+                }
+                MenuItem {
+                    text: "Stay logged In"
+                    onTriggered: {
+                        print("Staying logged in...");
+                    }
+                }
             }
         }
-    }
-    TabButton {
-        id: student_button
-        x: 19
-        y: 200
-        width: 280
-        height: 48
-        text: qsTr("Students")
-        font.weight: Font.Normal
-        font.bold: false
-        font.pointSize: 14
-        rotation: 0
 
-        Label {
-            font.pixelSize: 16
-            Image {
-                x: 35
-                y: 10
-                width: 30
-                height: 30
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/student.png"
-                fillMode: Image.PreserveAspectFit
+        Rectangle {
+            id: hoverLine
+            width: 20
+            height: 1
+            color: "blue"
+            visible: false
+
+            anchors {
+                top: parent.bottom
+                topMargin: -2
             }
         }
-    }
-    TabButton {
-        id: report_button
-        x: 19
-        y: 262
-        width: 280
-        height: 48
-        text: qsTr("Report")
-        font.weight: Font.Normal
-        font.bold: false
-        font.pointSize: 14
-        rotation: 0
-
-        Label {
-            font.pixelSize: 16
-            Image {
-                x: 35
-                y: 10
-                width: 30
-                height: 30
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/report.png"
-                fillMode: Image.PreserveAspectFit
-            }
-        }
-    }
-    TabButton {
-        id: policy_button
-        x: 19
-        y: 324
-        width: 280
-        height: 48
-        text: qsTr("Policy")
-        font.weight: Font.Normal
-        font.bold: false
-        font.pointSize: 14
-        rotation: 0
-
-        Label {
-            font.pixelSize: 16
-            Image {
-                x: 35
-                y: 10
-                width: 30
-                height: 30
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/terms.png"
-                fillMode: Image.PreserveAspectFit
-            }
-        }
-    }
-    // ToolSeparator {
-    //     rotation: 0
-    //     width: 240
-    //     x: 30
-    //     y: 386
-    //     orientation: Qt.Horizontal
-    // }
-    Pane {
-        x: 30
-        y: 386
-        width: 240
-        height: 0
-        Material.elevation: 3
-    }
-    TabButton {
-        id: team_button
-        x: 19
-        y: 420
-        width: 280
-        height: 48
-        text: qsTr("Team")
-        font.weight: Font.Normal
-        font.bold: false
-        font.pointSize: 14
-        rotation: 0
-
-        Label {
-            font.pixelSize: 16
-            Image {
-                x: 35
-                y: 10
-                width: 30
-                height: 30
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/team.png"
-                fillMode: Image.PreserveAspectFit
-            }
-        }
-    }
-    TabButton {
-        id: logout_button
-        x: 19
-        y: 482
-        width: 280
-        height: 48
-        text: qsTr("Logout")
-        font.weight: Font.Normal
-        font.bold: false
-        font.pointSize: 14
-        rotation: 0
-
-        Label {
-            font.pixelSize: 16
-            Image {
-                x: 35
-                y: 10
-                width: 30
-                height: 30
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/logout.png"
-                fillMode: Image.PreserveAspectFit
-            }
-        }
-    }
-    Text {
-        text: 'Copyright © 2024 ASK Pvt. Ltd.'
-        font.bold: false
-        font.weight: Font.Normal
-        font.pixelSize: 10
-        x: 80
-        y: 750
     }
 }
