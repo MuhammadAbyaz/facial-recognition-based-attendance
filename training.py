@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 import requests
-
 from db import bucket_name, supabase
+
 from face_dectection import detect_face
 from face_prediction import face_recognizer
 from logger import Logger
@@ -19,7 +19,7 @@ def get_images_url():
     url_list: list[str] = []
     training_bucket = supabase.storage.from_(bucket_name)
 
-    folders = list(map(lambda f: f['name'], training_bucket.list()))
+    folders = list(map(lambda folder: folder['name'], training_bucket.list()))
     for folder in folders:
         for value in training_bucket.list(folder):
             filename = value['name']
