@@ -1,23 +1,25 @@
 class Student():
-    def __init__(self, name=None, email=None, roll_number=None, courses=None):
+    def __init__(self, name=None, email=None, roll_number=None):
         self.name = name
         self.email = email
         self.roll_number = roll_number
-        self.courses = courses
+        self.id = None
 
     def json(self):
-        return {
+        student_json = {
             "name": self.name,
             "email": self.email,
             "roll_number": self.roll_number,
-            "courses": list(self.courses)
         }
+        if self.id is not None:
+            student_json['id'] = self.id
+        return student_json
 
     @staticmethod
     def from_json(student_json: dict):
-        old_student = Student()
-        old_student.name = student_json["name"]
-        old_student.email = student_json["email"]
-        old_student.roll_number = student_json["roll_number"]
-        old_student.courses = student_json["courses"]
-        return old_student
+        student = Student()
+        student.id = student_json['id']
+        student.name = student_json["name"]
+        student.email = student_json["email"]
+        student.roll_number = student_json["roll_number"]
+        return student
