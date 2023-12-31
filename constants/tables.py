@@ -1,0 +1,5 @@
+STUDENTS = 'students'
+ATTENDANCE = 'attendance'
+STUDENT_COURSES = 'student_courses'
+TEACHERS = 'teachers'
+COURSES = 'courses'

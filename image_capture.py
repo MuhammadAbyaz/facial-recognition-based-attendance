@@ -1,7 +1,8 @@
 import os
 
 import cv2
-from db import bucket_name, supabase
+
+from database.db import bucket_name, supabase
 
 
 def capture_images(id):

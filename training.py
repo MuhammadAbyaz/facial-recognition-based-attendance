@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 import requests
-from db import bucket_name, supabase
 
+from database.db import bucket_name, supabase
 from face_dectection import detect_face
 from face_prediction import face_recognizer
 from logger import Logger

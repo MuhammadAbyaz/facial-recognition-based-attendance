@@ -6,5 +6,8 @@
   "[qml]": {
     "editor.defaultFormatter": "seanwu.vscode-qt-for-python",
     "editor.formatOnSave": true
+  },
+  "files.exclude": {
+    "**/__pycache__": true
   }
 }
