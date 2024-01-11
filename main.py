@@ -1,27 +1,27 @@
 import sys
 from os.path import abspath, dirname, join
 
-from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 
-
-class Bridge(QObject):
-    @Slot(str, str)
-    def login(self, username: str, password: str):
-        print(username, password)
-
+from bridges.attendance import AttendanceBridge
+from bridges.login import LoginBridge
+from bridges.teacher_dashboard import TeacherDashboardBridge
 
 if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
     # Instance of the Python object
-    bridge = Bridge()
+    login_bridge = LoginBridge()
+    teacher_bridge = TeacherDashboardBridge()
+    attendance_bridge = AttendanceBridge()
 
     # Expose the Python object to QML
     context = engine.rootContext()
-    context.setContextProperty("con", bridge)
+    context.setContextProperty("login_api", login_bridge)
+    context.setContextProperty("teacher_api", teacher_bridge)
+    context.setContextProperty('attendance_api', attendance_bridge)
 
     # Get the path of the current directory, and then add the name
     # of the QML file, to load it.
