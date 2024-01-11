@@ -1,4 +1,4 @@
-import QtQuick 2.16
+import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Window
@@ -6,6 +6,26 @@ import QtQuick.Controls.Material
 
 Page {
     title: "Facial Recognition Based Attendance"
+
+    Popup {
+        id: popup
+        parent: Overlay.overlay
+        x: Math.round((parent.width - width) / 2)
+        y: Math.round((parent.height - height) / 2)
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        Label {
+            id: popupText
+            text: "Error"
+            font.pixelSize: 18
+            font.bold: true
+            padding: 10
+            horizontalAlignment: Label.AlignHCenter
+            color: 'red'
+        }
+    }
+
 
     Image {
         width: 1400
@@ -23,6 +43,7 @@ Page {
             fillMode: Image.PreserveAspectFit
         }
     }
+
     Image {
         x: 1000
         y: 155
@@ -31,15 +52,24 @@ Page {
         source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/ned_logo.png"
         fillMode: Image.PreserveAspectFit
     }
+
     Column {
         spacing: 20
         x: 700
         y: 370
         TextField {
-            id: usernameField
-            placeholderText: qsTr("Username or Email")
+            id: emailField
+            placeholderText: qsTr("Email")
             width: 300
             x: 250
+            text: "m.abyaz681@gmail.com"
+        }
+        Text {
+            id: emailFieldError
+            font.pixelSize: 12
+            x: 250
+            padding: 0
+            color: 'red'
         }
         TextField {
             id: passwordField
@@ -47,6 +77,14 @@ Page {
             width: 300
             echoMode: TextInput.Password
             x: 250
+            text: 'nothing78'
+        }
+        Text {
+            id: passwordFieldError
+            font.pixelSize: 12
+            x: 250
+            padding: 0
+            color: 'red'
         }
         Button {
             text: qsTr("Login")
@@ -59,8 +97,23 @@ Page {
             }
             highlighted: true
             onClicked: {
-                con.login(usernameField.text, passwordField.text);
-                stackView.push("admin_dashboard.qml");
+                if (!emailField.text) {
+                    emailFieldError.text = 'Email can\'t be empty.'
+                    return;
+                }
+                emailFieldError.text  = '';
+                if (!passwordField.text) {
+                    passwordFieldError.text = 'Password can\'t be empty.'
+                    return;
+                }
+                passwordFieldError.text = '';
+                var result = login_api.login(emailField.text, passwordField.text);
+                if (result.success) {
+                    stackView.replace("teacher_dashboard.qml");
+                } else {
+                    popupText.text = result.error;
+                    popup.open();
+                }
             }
         }
     }

@@ -133,9 +133,15 @@ Page {
             visible: false
 
             anchors {
-                top: parent.bottom
+                // top: parent.bottom
                 topMargin: -2
             }
         }
+    }
+
+    Text {
+        anchors.centerIn: parent
+        property string username: login_api.get_username()
+        text: username
     }
 }
