@@ -399,4 +399,10 @@ Page {
             }
         }
     }
+
+    Text {
+        anchors.centerIn: parent
+        property string username: login_api.get_username()
+        text: username
+    }
 }

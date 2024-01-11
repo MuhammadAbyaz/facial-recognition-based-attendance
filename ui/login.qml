@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Window
@@ -7,84 +7,112 @@ import QtQuick.Controls.Material
 Page {
     title: "Facial Recognition Based Attendance"
 
-    RowLayout {
-        x: 0
-        y: -200
-        width: 1530
-        height: 500
-        Image {
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Frame%201.png"
+    Popup {
+        id: popup
+        parent: Overlay.overlay
+        x: Math.round((parent.width - width) / 2)
+        y: Math.round((parent.height - height) / 2)
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        Label {
+            id: popupText
+            text: "Error"
+            font.pixelSize: 18
+            font.bold: true
+            padding: 10
+            horizontalAlignment: Label.AlignHCenter
+            color: 'red'
         }
     }
-    RowLayout {
-        spacing: 50
+
+
+    Image {
+        width: 1400
+        height: 700
+        x: 45
+        y: -260
+        source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/logo.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Column {
         y: 150
-        Column {
-            y: 150
-            Image {
-                width: 765
-                height: 500
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/login_ill.png"
-                fillMode: Image.PreserveAspectFit
-            }
+        Image {
+            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/login_illustration.png"
+            fillMode: Image.PreserveAspectFit
         }
-        Column {
-            spacing: 10
-            Pane {
-                rotation: 0
-                x: 120
-                height: 500
-                width: 500
-                Text {
-                    x: 160
-                    text: qsTr("<b>WELCOME</b>")
-                    font.family: "Helvetica"
-                    font.pointSize: 24
-                    color: "#740041"
+    }
+
+    Image {
+        x: 1000
+        y: 155
+        width: 180
+        height: 150
+        source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/ned_logo.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Column {
+        spacing: 20
+        x: 700
+        y: 370
+        TextField {
+            id: emailField
+            placeholderText: qsTr("Email")
+            width: 300
+            x: 250
+            text: "m.abyaz681@gmail.com"
+        }
+        Text {
+            id: emailFieldError
+            font.pixelSize: 12
+            x: 250
+            padding: 0
+            color: 'red'
+        }
+        TextField {
+            id: passwordField
+            placeholderText: qsTr("Password")
+            width: 300
+            echoMode: TextInput.Password
+            x: 250
+            text: 'nothing78'
+        }
+        Text {
+            id: passwordFieldError
+            font.pixelSize: 12
+            x: 250
+            padding: 0
+            color: 'red'
+        }
+        Button {
+            text: qsTr("Login")
+            width: 150
+            height: 60
+            x: 323
+            background: Rectangle {
+                radius: 50
+                color: '#740041'
+            }
+            highlighted: true
+            onClicked: {
+                if (!emailField.text) {
+                    emailFieldError.text = 'Email can\'t be empty.'
+                    return;
                 }
-                Column {
-                    spacing: 10
-                    anchors.centerIn: parent
-                    TextField {
-                        id: usernameField
-                        placeholderText: qsTr("Username or Email")
-                        width: 300
-                    }
-                    TextField {
-                        id: passwordField
-                        placeholderText: qsTr("Password")
-                        width: 300
-                        echoMode: TextInput.Password
-                    }
-                    Button {
-                        x: 80
-                        text: qsTr("Login")
-                        width: 150
-                        height: 60
-                        background: Rectangle {
-                            radius: 100
-                            color: '#740041'
-                        }
-                        highlighted: true
-                        onClicked: {
-                            stackView.push("admin_dashboard.qml");
-                        }
-                    }
+                emailFieldError.text  = '';
+                if (!passwordField.text) {
+                    passwordFieldError.text = 'Password can\'t be empty.'
+                    return;
                 }
-                Text {
-                    x: 160
-                    anchors.bottom: parent.bottom
-                    text: qsTr("<b>In collaboration with</b>")
-                    font.pixelSize: 15
-                    color: "#740041"
-                }
-                Image {
-                    x: 310
-                    height: 30
-                    width: 30
-                    anchors.bottom: parent.bottom
-                    source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Frame%201%20(2).png"
+                passwordFieldError.text = '';
+                var result = login_api.login(emailField.text, passwordField.text);
+                if (result.success) {
+                    stackView.replace("teacher_dashboard.qml");
+                } else {
+                    popupText.text = result.error;
+                    popup.open();
                 }
             }
         }

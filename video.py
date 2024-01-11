@@ -2,8 +2,8 @@ from datetime import datetime
 
 import cv2
 
-from database.db import supabase
 from face_prediction import predict_face
+from mail import send_email
 from repositories.attendance_repository import get_attendance, save_attendance
 from repositories.student_repository import get_all_students
 from training import training_on_images
@@ -41,4 +41,8 @@ def capture_video(course_id):
     attendance_to_mark = filter(
         lambda record: record not in marked_attendance, attendance)
 
+    absent_students = filter(
+        lambda student: student.id not in attendance_to_mark, students
+    )
     save_attendance(today, course_id, attendance_to_mark)
+    send_email(absent_students)

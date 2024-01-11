@@ -1,5 +1,5 @@
 class Teacher():
-    def __init__(self, name, email, password, gender):
+    def __init__(self, name=None, email=None, password=None, gender=None):
         self.name = name
         self.email = email
         self.password = password
