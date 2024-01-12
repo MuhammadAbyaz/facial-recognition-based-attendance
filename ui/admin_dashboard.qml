@@ -8,67 +8,66 @@ Page {
     title: "Smart Attendance"
     property var options: ["Teachers", "Students", "Report a bug", "Logout"]
     property int currentIndex: 0
+
+    //teacher popups
+
+
     Popup {
-        id: add_popup
+        id: add_teacher_popup
         x: 630
         y: 180
         height: 400
         width: 600
-        
+
         Column {
             anchors.centerIn: parent
             spacing: 10
-        Text {
-            color: '#740041'
-            text: qsTr("<h1>Add Teacher</h1>")
-            x:80
-        }
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>Add Teacher</h1>")
+                x: 80
+            }
             TextField {
-                id: name_field
+                id: teacher_name_field
                 placeholderText: qsTr("Name")
                 width: 300
             }
             TextField {
-                id: email_field
+                id: teacher_email_field
                 placeholderText: qsTr("Email")
                 width: 300
             }
             TextField {
-                id: password_field
+                id: teacher_password_field
                 placeholderText: qsTr("Password")
                 width: 300
             }
             Row {
                 spacing: 50
                 RadioButton {
-                    id: gender_male
+                    id: teacher_gender_male
                     text: qsTr("Male")
                 }
                 RadioButton {
-                    id: gender_female
+                    id: teacher_gender_female
                     text: qsTr("Female")
                 }
             }
-            Button {    
-                        x:120
-                        width: 70
-                        height: 50
-                        background: Rectangle {
-                            radius: 50
-                            color: '#740041'
-                            Image {
-                                width:18
-                                height:18
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
-                            }
-                        }
-                        highlighted: true
-                    }
+            RoundButton {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("Add")
+                }
+            }
         }
     }
     Popup {
-        id: delete_popup
+        id: delete_teacher_popup
         x: 630
         y: 180
         height: 400
@@ -77,36 +76,32 @@ Page {
         Column {
             anchors.centerIn: parent
             spacing: 10
-        Text {
-            color: '#740041'
-            text: qsTr("<h1>Delete Teacher</h1>")
-            x:80
-        }
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>Delete Teacher</h1>")
+                x: 80
+            }
             TextField {
-                id: id_field
+                id: teacher_id_field
                 placeholderText: qsTr("Teacher Id")
                 width: 300
             }
-           Button {    
-                        x:120
-                        width: 70
-                        height: 50
-                        background: Rectangle {
-                            radius: 50
-                            color: '#740041'
-                            Image {
-                                width:18
-                                height:18
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/delete.png"
-                            }
-                        }
-                        highlighted: true
-                    } 
+            RoundButton {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("Delete")
+                }
+            }
         }
     }
+
     Popup {
-        id: edit_popup
+        id: edit_teacher_popup
         x: 630
         y: 180
         height: 400
@@ -115,52 +110,46 @@ Page {
         Column {
             anchors.centerIn: parent
             spacing: 10
-        Text {
-            color: '#740041'
-            text: qsTr("<h1>Edit Teacher</h1>")
-            x:80
-        }
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>Edit Teacher</h1>")
+                x: 80
+            }
             TextField {
-                id: edit_id_field
+                id: teacher_edit_id_field
                 placeholderText: qsTr("Teacher Id")
                 width: 300
             }
-             TextField {
-                id: edit_name_field
+            TextField {
+                id: teacher_edit_name_field
                 placeholderText: qsTr("Name")
                 width: 300
             }
             TextField {
-                id: edit_email_field
+                id: teacher_edit_email_field
                 placeholderText: qsTr("Email")
                 width: 300
             }
             TextField {
-                id: edit_password_field
+                id: teacher_edit_password_field
                 placeholderText: qsTr("Password")
                 width: 300
             }
-           Button {    
-                        x:120
-                        width: 70
-                        height: 50
-                        background: Rectangle {
-                            radius: 50
-                            color: '#740041'
-                            Image {
-                                width:18
-                                height:18
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
-                            }
-                        }
-                        highlighted: true
-                    } 
+            RoundButton {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("Edit")
+                }
+            }
         }
-
     }
     Popup {
-        id: view_popup
+        id: view_teacher_popup
         x: 630
         y: 180
         height: 400
@@ -169,32 +158,190 @@ Page {
         Column {
             anchors.centerIn: parent
             spacing: 10
-        Text {
-            color: '#740041'
-            text: qsTr("<h1>View Teacher</h1>")
-            x:80
-        }
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>View Teacher</h1>")
+                x: 80
+            }
             TextField {
-                id: view_id_field
+                id: teacher_view_id_field
                 placeholderText: qsTr("Teacher Id")
                 width: 300
             }
-           Button {    
-                        x:120
-                        width: 70
-                        height: 50
-                        background: Rectangle {
-                            radius: 50
-                            color: '#740041'
-                            Image {
-                                width:18
-                                height:18
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/view.png"
-                            }
-                        }
-                        highlighted: true
-                    } 
+            Button {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("View")
+                }
+            }
+        }
+    }
+
+
+    // student popups
+
+
+    Popup {
+        id: add_student_popup
+        x: 630
+        y: 180
+        height: 400
+        width: 600
+
+        Column {
+            anchors.centerIn: parent
+            spacing: 10
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>Add Student</h1>")
+                x: 80
+            }
+            TextField {
+                id: student_name_field
+                placeholderText: qsTr("Name")
+                width: 300
+            }
+            TextField {
+                id: student_email_field
+                placeholderText: qsTr("Email")
+                width: 300
+            }
+            TextField {
+                id: student_roll_no_field
+                placeholderText: qsTr("Roll number")
+                width: 300
+            }
+            RoundButton {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("Add")
+                }
+            }
+        }
+    }
+    Popup {
+        id: delete_student_popup
+        x: 630
+        y: 180
+        height: 400
+        width: 600
+
+        Column {
+            anchors.centerIn: parent
+            spacing: 10
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>Delete Student</h1>")
+                x: 80
+            }
+            TextField {
+                id: student_id_field
+                placeholderText: qsTr("Student Id")
+                width: 300
+            }
+            RoundButton {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("Delete")
+                }
+            }
+        }
+    }
+
+    Popup {
+        id: edit_student_popup
+        x: 630
+        y: 180
+        height: 400
+        width: 600
+
+        Column {
+            anchors.centerIn: parent
+            spacing: 10
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>Edit Student</h1>")
+                x: 80
+            }
+            TextField {
+                id: student_edit_id_field
+                placeholderText: qsTr("Student Id")
+                width: 300
+            }
+            TextField {
+                id: student_edit_name_field
+                placeholderText: qsTr("Name")
+                width: 300
+            }
+            TextField {
+                id: student_edit_email_field
+                placeholderText: qsTr("Email")
+                width: 300
+            }
+            TextField {
+                id: student_edit_roll_no_field
+                placeholderText: qsTr("Roll number")
+                width: 300
+            }
+            RoundButton {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("Edit")
+                }
+            }
+        }
+    }
+    Popup {
+        id: view_student_popup
+        x: 630
+        y: 180
+        height: 400
+        width: 600
+
+        Column {
+            anchors.centerIn: parent
+            spacing: 10
+            Text {
+                color: '#740041'
+                text: qsTr("<h1>View Student</h1>")
+                x: 80
+            }
+            TextField {
+                id: student_view_id_field
+                placeholderText: qsTr("Student Id")
+                width: 300
+            }
+            Button {
+                x: 120
+                width: 70
+                height: 50
+                Material.background: '#740041'
+                Text {
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    text: qsTr("View")
+                }
+            }
         }
     }
     Row {
@@ -256,61 +403,48 @@ Page {
                     return studentPage;
                 case 2:
                     return reportPage;
-                case 3:
-                    return teampage;
                 }
             }
         }
+
+        // teacher component
+
         Component {
             id: teacherPage
+
             Column {
+
                 y: 230
+
                 Row {
                     x: 480
                     spacing: 50
-                    // Button {
-                    //     x: 50
-                    //     width: 120
-                    //     height: 120
-                    //     background: Rectangle {
-                    //         radius: 120
-                    //         color: '#740041'
-                    //         Image {
-                    //             anchors.centerIn: parent
-                    //             source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
-                    //         }
-                    //     }
-                    //     highlighted: true
-                    //     onClicked: {
-                    //         add_popup.open();
-                    //     }
-                    // }
-                RoundButton {
-            x: 50
-            height: 100
-            width: 100
-            Material.accent: Material.Red
-            Image {
-                anchors.centerIn: parent
-                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
-            }
-        }
-                    Button {
+                    RoundButton {
+                        x: 50
+                        height: 120
+                        width: 120
+                        Material.background: "#ffffff"
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
+                        }
+                        onClicked: {
+                            add_teacher_popup.open();
+                        }
+                    }
+                    RoundButton {
                         x: 70
                         width: 120
                         height: 120
-                        background: Rectangle {
-                            radius: 120
-                            color: '#740041'
-                            Image {
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/delete.png"
-                            }
-                            Material.elevation: 6
+                        Material.background: "#ffffff"
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/delete.png"
                         }
-                        highlighted: true
+
                         onClicked: {
-                            delete_popup.open();
+                            delete_teacher_popup.open();
                         }
                     }
                 }
@@ -318,50 +452,113 @@ Page {
                 Row {
                     x: 480
                     spacing: 50
-                    Button {
+                    RoundButton {
                         x: 90
                         width: 120
                         height: 120
-                        background: Rectangle {
-                            radius: 120
-                            color: '#740041'
-                            Image {
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
-                            }
+                        Material.background: "#ffffff"
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
                         }
-                        highlighted: true
+
                         onClicked: {
-                            edit_popup.open();
+                            edit_teacher_popup.open();
                         }
                     }
-                    Button {
+                    RoundButton {
                         x: 90
                         width: 120
                         height: 120
-                        background: Rectangle {
-                            radius: 120
-                            color: '#740041'
-                            Image {
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/view.png"
-                            }
+                        Material.background: "#ffffff"
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/view.png"
                         }
-                        highlighted: true
+
                         onClicked: {
-                            view_popup.open();
+                            view_teacher_popup.open();
                         }
                     }
                 }
             }
         }
+
+        // student componenet
+
+
         Component {
             id: studentPage
             Column {
-                Text {
-                    anchors.centerIn: parent
-                    text: "Settings Page"
-                    font.pixelSize: 20
+                y: 230
+                Row {
+                    x: 480
+                    spacing: 50
+                    RoundButton {
+                        x: 50
+                        height: 120
+                        width: 120
+                        Material.background: "#ffffff"
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
+                        }
+                        onClicked: {
+                            add_student_popup.open();
+                        }
+                    }
+                    RoundButton {
+                        x: 70
+                        width: 120
+                        height: 120
+                        Material.background: "#ffffff"
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/delete.png"
+                        }
+
+                        onClicked: {
+                            delete_student_popup.open();
+                        }
+                    }
+                }
+                spacing: 50
+                Row {
+                    x: 480
+                    spacing: 50
+                    RoundButton {
+                        x: 90
+                        width: 120
+                        height: 120
+                        Material.background: "#ffffff"
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
+                        }
+
+                        onClicked: {
+                            edit_student_popup.open();
+                        }
+                    }
+                    RoundButton {
+                        x: 90
+                        width: 120
+                        height: 120
+                        Material.background: "#ffffff"
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/view.png"
+                        }
+
+                        onClicked: {
+                            view_student_popup.open();
+                        }
+                    }
                 }
             }
         }
@@ -409,11 +606,5 @@ Page {
                 }
             }
         }
-    }
-
-    Text {
-        anchors.centerIn: parent
-        property string username: login_api.get_username()
-        text: username
     }
 }
