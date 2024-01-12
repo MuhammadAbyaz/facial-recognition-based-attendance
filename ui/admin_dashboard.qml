@@ -60,7 +60,7 @@ Page {
                                 width:18
                                 height:18
                                 anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Layer_1.png"
+                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
                             }
                         }
                         highlighted: true
@@ -98,7 +98,7 @@ Page {
                                 width:18
                                 height:18
                                 anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Layer_1%20(1).png"
+                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/delete.png"
                             }
                         }
                         highlighted: true
@@ -151,7 +151,7 @@ Page {
                                 width:18
                                 height:18
                                 anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Frame.png"
+                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
                             }
                         }
                         highlighted: true
@@ -268,23 +268,33 @@ Page {
                 Row {
                     x: 480
                     spacing: 50
-                    Button {
-                        x: 50
-                        width: 120
-                        height: 120
-                        background: Rectangle {
-                            radius: 120
-                            color: '#740041'
-                            Image {
-                                anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Layer_1.png"
-                            }
-                        }
-                        highlighted: true
-                        onClicked: {
-                            add_popup.open();
-                        }
-                    }
+                    // Button {
+                    //     x: 50
+                    //     width: 120
+                    //     height: 120
+                    //     background: Rectangle {
+                    //         radius: 120
+                    //         color: '#740041'
+                    //         Image {
+                    //             anchors.centerIn: parent
+                    //             source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
+                    //         }
+                    //     }
+                    //     highlighted: true
+                    //     onClicked: {
+                    //         add_popup.open();
+                    //     }
+                    // }
+                RoundButton {
+            x: 50
+            height: 100
+            width: 100
+            Material.accent: Material.Red
+            Image {
+                anchors.centerIn: parent
+                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/add.png"
+            }
+        }
                     Button {
                         x: 70
                         width: 120
@@ -294,8 +304,9 @@ Page {
                             color: '#740041'
                             Image {
                                 anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Layer_1%20(1).png"
+                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/delete.png"
                             }
+                            Material.elevation: 6
                         }
                         highlighted: true
                         onClicked: {
@@ -316,7 +327,7 @@ Page {
                             color: '#740041'
                             Image {
                                 anchors.centerIn: parent
-                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/Frame.png"
+                                source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
                             }
                         }
                         highlighted: true

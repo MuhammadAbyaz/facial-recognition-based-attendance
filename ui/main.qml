@@ -20,7 +20,7 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "test.qml"
+        initialItem: "admin_dashboard.qml"
         anchors.fill: parent
     }
 }
