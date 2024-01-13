@@ -28,6 +28,7 @@ class AttendanceBridge(QObject):
             cv2.imshow(
                 "Frame", frame
             )
+            cv2.moveWindow("Frame", 750, 180)
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 

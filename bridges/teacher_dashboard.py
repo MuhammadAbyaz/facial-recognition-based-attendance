@@ -12,6 +12,5 @@ class TeacherDashboardBridge(QObject):
         teacher = get_teacher_by_email(user_email)
         data, _ = supabase.table(COURSES).select(
             "courseName").eq("teacherID", teacher.id).execute()
-        data, _ = supabase.table(COURSES).select("courseName").execute()
 
         return [record["courseName"] for record in data[1]]
