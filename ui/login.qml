@@ -14,7 +14,6 @@ Page {
         y: Math.round((parent.height - height) / 2)
         modal: true
         focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         Label {
             id: popupText
             text: "Error"
@@ -26,20 +25,23 @@ Page {
         }
     }
 
-
+Row{
+    height:200
+    width:parent.width
+    anchors.top:parent.top
     Image {
-        width: 1400
-        height: 700
-        x: 45
-        y: -260
-        source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/logo.png"
+        anchors.centerIn:parent
+        source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/logo.svg"
         fillMode: Image.PreserveAspectFit
     }
-
+}
     Column {
+        x:50
         y: 150
         Image {
-            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/login_illustration.png"
+            width:850
+            height:450
+            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/login_illustration.svg"
             fillMode: Image.PreserveAspectFit
         }
     }
