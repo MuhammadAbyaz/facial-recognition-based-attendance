@@ -40,7 +40,7 @@ def mark_attendance(course_id):
         lambda record: record not in marked_attendance, attendance)
 
     absent_students = filter(
-        lambda student: student.id not in attendance_to_mark, students
+        lambda student: student.id not in attendance_to_mark and student.id not in marked_attendance, students
     )
     save_attendance(today, course_id, attendance_to_mark)
     send_email(absent_students)
