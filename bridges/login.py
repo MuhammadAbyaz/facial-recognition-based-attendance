@@ -1,12 +1,13 @@
 from gotrue.errors import AuthApiError
 from gotrue.types import AuthResponse
-from PySide6.QtCore import QObject, Slot
+from PySide6.QtCore import Property, QObject, Signal, Slot
 
 from database.db import supabase
 
 
 class LoginBridge(QObject):
     __auth: AuthResponse = None
+    training_done = Signal()
 
     @Slot(str, str, result=dict)
     def login(self, email: str, password: str):

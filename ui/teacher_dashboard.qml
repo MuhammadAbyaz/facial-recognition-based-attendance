@@ -9,13 +9,24 @@ Page {
     title: "Smart Attendance"
     property int currentIndex: 0
     property var courses: teacher_api.courses_model()
-    // property var courses: ["Programming language","OOP"]
-
     property var options: ["View Attendance", "Mark Attendance"]
+    property var selected_date : ""
+    property var selected_course: 0
 
+    Popup{
+        id: export_popup
+        parent: Overlay.overlay
+        x: Math.round((parent.width - width) / 2)
+        y: Math.round((parent.height - height) / 2)
+        Text{
+            color: "#740041"
+            text: qsTr("Export Completed")
+        }
+    }
+    // view attendance popup
     Popup {
         id: view_attendance_popup
-        parent:Overlay.overlay
+        parent: Overlay.overlay
         x: 615
         y: 180
         height: 400
@@ -34,11 +45,15 @@ Page {
                 id: export_button
                 anchors.right: parent.right
                 Material.background: "#740041"
-                Image{
-                    anchors.centerIn:parent
-                    source:"https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/download.svg"
+                Image {
+                    anchors.centerIn: parent
+                    source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/download.svg"
                 }
-                
+                onClicked: {
+                    view_attendance_popup.close()
+                    export_popup.open()
+                    attendance_api.to_excel(selected_date,selected_course)
+                }
             }
         }
         Row {
@@ -91,13 +106,13 @@ Page {
                             display: "date"
                         }
                         TableModelColumn {
-                            display: "studentID"
+                            display: "studentName"
                         }
                         TableModelColumn {
-                            display: "courseID"
+                            display: "courseName"
                         }
                         rows: []
-                    }
+                }
                     Connections {
                         target: attendance_api
                         function onDataChanged() {
@@ -107,7 +122,7 @@ Page {
                                 attendance_model.appendRow(attendance[i]);
                             }
                         }
-                    }
+                }
                     delegate: Column {
                         Row {
                             Rectangle {
@@ -122,6 +137,40 @@ Page {
                         }
                     }
                 }
+            }
+        }
+    }
+    // mark attendance popup
+    Popup{
+        id: mark_attendance_popup
+        parent: Overlay.overlay
+        x: 700
+        y: 200
+        height: 200
+        width: 300
+        ComboBox {
+            anchors.centerIn: parent
+            anchors.top: parent.top
+            id: comboBox
+            width: 200
+            editable: false
+            model: courses
+        }
+        RoundButton{
+                Text {
+                anchors.centerIn: parent
+                text: qsTr("Record Attendance")
+                color: "white"
+            }
+            width: 150
+            height: 60
+            radius: 50
+            Material.background: '#740041'
+            onClicked: {
+                teacher_api.training_on_data()
+                var course_id = teacher_api.get_course_id(comboBox.currentValue)
+                mark_attendance_popup.close()
+                attendance_api.mark_attendance(course_id);
             }
         }
     }
@@ -180,87 +229,85 @@ Page {
             sourceComponent: {
                 switch (currentIndex) {
                 case 0:
-                    return getAttendanceComponent;
+                    return get_attendance;
                 case 1:
-                    return attendanceComponent;
+                    return mark_attendance;
                 }
             }
         }
 
         Component {
-            id: getAttendanceComponent
+            id: get_attendance
             Column {
 
                 y: 350
-                Row{
-                    x:120
-                    spacing:180
-                TextField {
-                y:5
-                id: date_field
-                placeholderText: qsTr("yyyy/mm/dd")
-                width: 200
-            }
-                ComboBox {
-                    id: comboBox
-                    width: 200
-                    editable: true
-                    model: courses
+                Row {
+                    x: 120
+                    spacing: 180
+                    TextField {
+                        id: date_field
+                        y: 5
+                        placeholderText: qsTr("yyyy/mm/dd")
+                        width: 200
+                    }
+                    ComboBox {
+                        id: comboBox
+                        width: 200
+                        editable: false
+                        model: courses
+                    }
 
-                   
+                    RoundButton {
+                        Text {
+                            anchors.centerIn: parent
+                            text: qsTr("View Attendance")
+                            color: "white"
+                        }
+                        width: 150
+                        height: 60
+                        x: 500
+
+                        radius: 50
+                        Material.background: '#740041'
+
+                        onClicked: {
+                            selected_course = teacher_api.get_course_id(comboBox.currentValue)
+                            selected_date = date_field.text
+                            attendance_api.fetch_attendance(selected_course, selected_date);
+                            view_attendance_popup.open();
+                        }
+                    }
                 }
-
-                RoundButton {
+            }
+        }
+    Component {
+        id: mark_attendance
+        Column {
+            y: 80
+            Image {
+                x: 300
+                width: 500
+                height: 500
+                source: 'https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/attendance_marking.svg'
+            }
+            Row {
+                x: 450
+                Button {
+                    height: 60
+                    width: 200
+                    Material.background: "#740041"
                     Text {
                         anchors.centerIn: parent
-                        text: qsTr("View Attendance")
-                        color: "white"
+                        font.pixelSize: 16
+                        color: "#ffffff"
+                        text: qsTr("Mark Attendance")
                     }
-                    width: 150
-                    height: 60
-                    x: 500
-
-                    radius: 50
-                    Material.background: '#740041'
-
                     onClicked: {
-                        attendance_api.fetch_attendance(1, "2023-12-31");
-                        view_attendance_popup.open();
+                        mark_attendance_popup.open()
                     }
                 }
             }
-            }
         }
-
     }
-
-    Component {
-        id: attendanceComponent
-        Column {
-            y:80
-            Image{
-                x:300
-                width:500
-                height:500
-                source:'https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/attendance_marking.svg'
-            }
-            Row{
-                x:450
-            Button {
-                height:60
-                width:200
-                Material.background: "#740041"
-                Text {
-                    anchors.centerIn:parent
-                    font.pixelSize: 16
-                    color:"#ffffff"
-                    text: qsTr("Mark Attendance")
-                }
-                onClicked: {
-                    attendance_api.mark_attendance();
-                }
-            }
-            }
-        }
     }
 }
