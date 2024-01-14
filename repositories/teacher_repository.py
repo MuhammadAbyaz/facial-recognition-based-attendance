@@ -14,15 +14,16 @@ def add_teacher(name, email, password, gender, course_id):
 
 def remove_teacher(teacher_id):
     data, _ = supabase.table(TEACHERS).delete().eq("id", teacher_id).execute()
-    return data[1][teacher_id - 1]["id"]
+    return data[1][0]["id"]
 
 
 def update_teacher(teacher_id, **kwargs):
     old_teacher = get_by_id(teacher_id)
     teacher_json = old_teacher.json()
     teacher_json.update(kwargs)
-    data, _ = supabase.table(TEACHERS).update().eq("id", teacher_id).execute()
-    return data[1][0]
+    response = supabase.table(TEACHERS).update(
+        teacher_json).eq("id", teacher_id).execute()
+    return response.data[0]["id"]
 
 
 def get_by_id(teacher_id):

@@ -6,11 +6,9 @@ from face_prediction import predict_face
 from mail import send_email
 from repositories.attendance_repository import get_attendance, save_attendance
 from repositories.student_repository import get_all_students
-from training import training_on_images
 
 
-def capture_video(course_id):
-    training_on_images()
+def mark_attendance(course_id):
     students = get_all_students()
     if len(students) == 0:
         raise Exception("No Student Found")

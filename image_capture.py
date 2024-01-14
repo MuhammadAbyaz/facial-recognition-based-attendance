@@ -17,7 +17,8 @@ def capture_images(id):
         _, frame = video.read()
         cv2.putText(frame, str(num), (x, y), font, font_scale, text_color, 3)
         cv2.imshow("Image Capture", frame)
-        if cv2.waitKey(1) & 0xFF == ord('n'):
+        cv2.moveWindow("Image Capture", 750, 180)
+        if cv2.waitKey(1) & 0xFF == ord("n"):
             cv2.imwrite(f"{num}.jpg", frame)
             if num == 10:
                 cv2.destroyAllWindows()
@@ -29,7 +30,7 @@ def capture_images(id):
 def upload_images(id):
     for i in range(1, 11):
         with open(f"{i}.jpg", "rb") as f:
-            supabase.storage.from_(bucket_name).upload(
-                f"{id}/{i}.jpg", f, {"content-type": "image/jpg"})
+            headers = {"content-type": "image/jpg"}
+            supabase.storage.from_(bucket_name).upload(f"{id}/{i}.jpg", f, headers)
     for i in range(1, 11):
         os.remove(f"{i}.jpg")

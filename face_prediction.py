@@ -15,7 +15,7 @@ def predict_face(_image: np.ndarray, students: list[Student]):
         idx, confidence = face_recognizer.predict(face)
         label_text, student = 'Unknown', None
         if confidence < 80:
-            student = students[idx - 1]
+            student = students[idx-1]
             label_text = student.name
         draw_rectangle(image, rect)
         draw_text(image, label_text, rect[0], rect[1] - 5)

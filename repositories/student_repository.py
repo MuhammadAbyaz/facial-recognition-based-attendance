@@ -4,20 +4,20 @@ from image_capture import capture_images
 from models.student import Student
 
 
-def student_course(student_id, course_id):
-    student_course_json = {"studentID": student_id, "courseID": course_id}
-    data, _ = supabase.table("student_courses").insert(
-        student_course_json
-    ).execute()
+def enroll_course(student_id, course_ids):
+    for id in course_ids:
+        student_course_json = {"studentID": student_id, "courseID": id}
+        data, _ = supabase.table("student_courses").insert(
+            student_course_json).execute()
+    return data[1][0]["studentID"]
 
 
-def add_student(name, email, roll_number, course_ids: list):
+def add_student(name, email, roll_number):
     newStudent = Student(name, email, roll_number)
     data, _ = supabase.table(STUDENTS).insert(newStudent.json()).execute()
     capture_images(data[1][0]["id"])
     student_id = data[1][0]["id"]
-    for id in course_ids:
-        student_course(student_id, id)
+
     return data[1][0]["id"]
 
 
@@ -26,7 +26,7 @@ def remove_student(student_id):
         "id", student_id
     ).execute()
 
-    return data[1][student_id - 1]["id"]
+    return data[1][0]["id"]
 
 
 def update_student(student_id, **kwargs):
@@ -40,7 +40,7 @@ def update_student(student_id, **kwargs):
         .eq("id", student_id)
         .execute()
     )
-    return data[1][0]
+    return data[1][0]["id"]
 
 
 def get_by_id(student_id):

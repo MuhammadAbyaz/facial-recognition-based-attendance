@@ -5,8 +5,7 @@ import QtQuick.Window
 import QtQuick.Controls.Material
 
 Page {
-    title: "Facial Recognition Based Attendance"
-
+    title: "Smart Attendance"
     Popup {
         id: popup
         parent: Overlay.overlay
@@ -24,7 +23,6 @@ Page {
             color: 'red'
         }
     }
-
 Row{
     height:200
     width:parent.width
@@ -36,35 +34,31 @@ Row{
     }
 }
     Column {
-        x:50
-        y: 150
+        anchors.left: parent.left
+        height: parent.height
+        width: 700
         Image {
-            width:850
-            height:450
+            anchors.centerIn: parent
             source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/login_illustration.svg"
-            fillMode: Image.PreserveAspectFit
         }
     }
-
-    Image {
-        x: 1000
-        y: 155
-        width: 180
-        height: 150
-        source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/ned_logo.png"
-        fillMode: Image.PreserveAspectFit
+    Text{
+        x:1040
+        y:270
+        text: qsTr("<h1>WELCOME</h1>")
+        color: "#740041"
     }
-
     Column {
         spacing: 20
+        height: parent.height
         x: 700
-        y: 370
+        y: 340
         TextField {
             id: emailField
             placeholderText: qsTr("Email")
             width: 300
             x: 250
-            text: "m.abyaz681@gmail.com"
+            text: ""
         }
         Text {
             id: emailFieldError
@@ -79,7 +73,7 @@ Row{
             width: 300
             echoMode: TextInput.Password
             x: 250
-            text: 'nothing78'
+            text: ''
         }
         Text {
             id: passwordFieldError
@@ -88,16 +82,17 @@ Row{
             padding: 0
             color: 'red'
         }
-        Button {
+        RoundButton {
+            Text{
+            anchors.centerIn: parent
             text: qsTr("Login")
+            color: "white"
+            }
             width: 150
             height: 60
             x: 323
-            background: Rectangle {
-                radius: 50
-                color: '#740041'
-            }
-            highlighted: true
+            radius:  50
+            Material.background: '#740041'
             onClicked: {
                 if (!emailField.text) {
                     emailFieldError.text = 'Email can\'t be empty.'
@@ -110,13 +105,36 @@ Row{
                 }
                 passwordFieldError.text = '';
                 var result = login_api.login(emailField.text, passwordField.text);
-                if (result.success) {
+                if (result.success && emailField.text == "asmakhan@neduet.edu.pk" &&
+                    passwordField.text == "password") {
+                    stackView.replace("admin_dashboard.qml");
+                } else if (result.success){
                     stackView.replace("teacher_dashboard.qml");
-                } else {
+                }
+                else {
                     popupText.text = result.error;
                     popup.open();
                 }
             }
         }
     }
+    Row{
+        height:30
+        width: parent.width
+        anchors.bottom: parent.bottom
+    Text{
+        anchors.centerIn: parent
+        text: qsTr("In collaboration with")
+        color: "#740041"
+        font.pixelSize:17
+        font.bold: true
+    }
+    Image{
+        x: 860
+        y:-2
+        source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/ned_logo.svg"
+    }
+    }
+
+
 }
