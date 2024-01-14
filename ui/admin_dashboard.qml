@@ -1074,11 +1074,11 @@ Page {
         Component {
             id: studentPage
             Column {
-                y: 230
+                y: 220
                 spacing: 50
-                // add and delete student buttons
+                // add and delete and edit student buttons
                 Row {
-                    x: 480
+                    x: 340
                     spacing: 50
                     RoundButton {
                         x: 50
@@ -1107,11 +1107,6 @@ Page {
                             delete_student_popup.open();
                         }
                     }
-                }
-                // edit and view student buttons
-                Row {
-                    x: 480
-                    spacing: 50
                     RoundButton {
                         x: 90
                         width: 120
@@ -1127,6 +1122,12 @@ Page {
                             edit_student_popup.open();
                         }
                     }
+                }
+                // edit and courses student buttons
+                Row {
+                    x: 420
+                    spacing: 50
+                    
                     RoundButton {
                         x: 90
                         width: 120
@@ -1142,10 +1143,6 @@ Page {
                             view_student_popup.open();
                         }
                     }
-                }
-                // enroll course button
-                Row{
-                    x:565
                     RoundButton {
                         x: 90
                         width: 120
@@ -1159,7 +1156,11 @@ Page {
                             enroll_course_popup.open();
                         }
                     }
+                
                 }
+               
+                 
+                    
             }
         }
 
@@ -1167,11 +1168,11 @@ Page {
         Component {
             id: coursePage
             Column {
-                y: 230
+                y: 300
                 spacing: 50
                 // add course buttons
                 Row {
-                    x: 480
+                    x: 380
                     spacing: 50
                     RoundButton {
                         x: 50
