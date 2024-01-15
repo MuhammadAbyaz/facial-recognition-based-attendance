@@ -1199,11 +1199,11 @@ Page {
 
                         Image {
                             anchors.centerIn: parent
-                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/view.png"
                         }
 
                         onClicked: {
-                            edit_course_popup.open();
+                            view_course_popup.open();
                         }
                     }
                     RoundButton {
@@ -1214,13 +1214,14 @@ Page {
 
                         Image {
                             anchors.centerIn: parent
-                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/view.png"
+                            source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/edit.png"
                         }
 
                         onClicked: {
-                            view_course_popup.open();
+                            edit_course_popup.open();
                         }
                     }
+                    
                 }
             }
         }
