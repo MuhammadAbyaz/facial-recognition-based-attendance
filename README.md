@@ -1,4 +1,4 @@
-# Smart Attendance
+![alt text](static/logo.png)
 
 ## About
 
