@@ -997,6 +997,18 @@ Page {
         Component {
             id: teacherPage
             Column {
+            Row{
+                    width: parent.width
+                    y: -100
+                    x: -20
+                    Text{
+                        anchors.centerIn: parent
+                        text: qsTr("Admin Dashboard")
+                        font.pixelSize:50
+                        font.bold: true
+                        color: '#740041'
+                    }
+                }
                 y: 230
                 spacing: 50
                 // add and delete teacher buttons
@@ -1074,8 +1086,21 @@ Page {
         Component {
             id: studentPage
             Column {
+                x: 50
                 y: 220
                 spacing: 50
+             Row{
+                    width: parent.width
+                    y: -100
+                    x: -100
+                    Text{
+                        anchors.centerIn: parent
+                        text: qsTr("Admin Dashboard")
+                        font.pixelSize:50
+                        font.bold: true
+                        color: '#740041'
+                    }
+                }
                 // add and delete and edit student buttons
                 Row {
                     x: 340
@@ -1170,6 +1195,18 @@ Page {
             Column {
                 y: 300
                 spacing: 50
+                            Row{
+                    width: parent.width
+                    y: -100
+                    x: -50
+                    Text{
+                        anchors.centerIn: parent
+                        text: qsTr("Admin Dashboard")
+                        font.pixelSize:50
+                        font.bold: true
+                        color: '#740041'
+                    }
+                }
                 // add course buttons
                 Row {
                     x: 380

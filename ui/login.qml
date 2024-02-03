@@ -131,7 +131,7 @@ Row{
     }
     Image{
         x: 860
-        y:-2
+        y:-11
         source: "https://xvvcduvfikwcadbbwivi.supabase.co/storage/v1/object/public/assets/ned_logo.svg"
     }
     }

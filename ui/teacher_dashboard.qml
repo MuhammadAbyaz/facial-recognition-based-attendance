@@ -239,8 +239,19 @@ Page {
         Component {
             id: get_attendance
             Column {
-
                 y: 350
+                Row{
+                    width: parent.width
+                    y: -100
+                    x: -50
+                    Text{
+                        anchors.centerIn: parent
+                        text: qsTr("Teacher Dashboard")
+                        font.pixelSize:50
+                        font.bold: true
+                        color: '#740041'
+                    }
+                }
                 Row {
                     x: 120
                     spacing: 180
